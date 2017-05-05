@@ -1,0 +1,11 @@
+node_modules/
+elm-stuff/
+bin/
+gen/
+build/
+apidata/
+temp/
+.sass-cache/
+temp.txt
+passwords.json
+.DS_Store

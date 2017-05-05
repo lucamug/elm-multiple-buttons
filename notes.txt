@@ -1,0 +1,9 @@
+Elm has managed effects, meaning that things like HTTP requests or writing to disk are all treated as data.
+
+There are two managed effects: Cmd and Sub (Commands and Subscriptions)
+
+Commands (Cmd) are how we tell the runtime to execute things that involve side effects (random numbers, http requests, etc.)
+
+Cmd.batch to execute several commands
+
+"parameterized types"

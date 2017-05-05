@@ -1,0 +1,28 @@
+{
+    "version": "1.0.0",
+    "summary": "helpful summary of your project, less than 80 characters",
+    "repository": "https://github.com/user/project.git",
+    "license": "BSD3",
+    "source-directories": [
+        ".",
+        "./source/01",
+        "./source/02",
+        "./source/03",
+        "./source/04",
+        "./source/05",
+        "./source/06",
+        "./source/07",
+        "./source/08",
+        "./source/09"
+    ],
+    "exposed-modules": [],
+    "dependencies": {
+        "NoRedInk/elm-decode-pipeline": "3.0.0 <= v < 4.0.0",
+        "elm-community/json-extra": "2.1.0 <= v < 3.0.0",
+        "elm-lang/core": "5.1.1 <= v < 6.0.0",
+        "elm-lang/html": "2.0.0 <= v < 3.0.0",
+        "elm-lang/http": "1.0.0 <= v < 2.0.0",
+        "rtfeldman/elm-css": "8.2.0 <= v < 9.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}
