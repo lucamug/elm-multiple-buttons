@@ -1,4 +1,4 @@
-module Buttons exposing (Model, Msg, Position, view, update, model)
+module Buttons exposing (Model, Msg, view, update, model)
 
 import Html exposing (Html, beginnerProgram, div, button, text, h1)
 import Html.Events exposing (onClick)
@@ -6,7 +6,7 @@ import Html.Attributes exposing (style)
 
 
 main =
-    beginnerProgram { model = model, view = (view 999), update = update }
+    beginnerProgram { model = model, view = view, update = update }
 
 
 type alias Model =
@@ -18,16 +18,12 @@ type alias Total =
     Int
 
 
-type alias Position =
-    Int
-
-
 type alias Increment =
     Int
 
 
 type Msg
-    = Add Increment Position
+    = Add Increment
 
 
 model : Model
@@ -35,8 +31,8 @@ model =
     Model 0
 
 
-view : Position -> Model -> Html Msg
-view position model =
+view : Model -> Html Msg
+view model =
     div
         [ style
             [ ( "border", "2px solid #ccc" )
@@ -46,8 +42,7 @@ view position model =
             , ( "margin", "10px" )
             ]
         ]
-        [ div [] [ text ("Position: " ++ toString position) ]
-        , button [ onClick (Add -1 position) ] [ text "-" ]
+        [ button [ onClick (Add -1) ] [ text "-" ]
         , div
             [ style
                 [ ( "display", "inline-block" )
@@ -55,7 +50,7 @@ view position model =
                 ]
             ]
             [ text (toString model.total) ]
-        , button [ onClick (Add 1 position) ] [ text "+" ]
+        , button [ onClick (Add 1) ] [ text "+" ]
         ]
 
 
@@ -69,5 +64,5 @@ update msg model =
             Debug.log "Buttons.update.model" model
     in
         case msg of
-            Add increment position ->
+            Add increment ->
                 { model | total = model.total + increment }

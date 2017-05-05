@@ -4,16 +4,7 @@
     "repository": "https://github.com/lucamug/elm-multiple-buttons.git",
     "license": "BSD3",
     "source-directories": [
-        ".",
-        "./source/01",
-        "./source/02",
-        "./source/03",
-        "./source/04",
-        "./source/05",
-        "./source/06",
-        "./source/07",
-        "./source/08",
-        "./source/09"
+        "./source/"
     ],
     "exposed-modules": [],
     "dependencies": {

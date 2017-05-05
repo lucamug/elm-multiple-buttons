@@ -3,6 +3,7 @@ module Main exposing (..)
 import Buttons
 import Html exposing (beginnerProgram, div)
 import Html.Events exposing (onClick)
+import Html.Attributes exposing (style)
 import Array
 
 
@@ -11,36 +12,41 @@ main =
 
 
 type alias Model =
-    { buttonsList : List Buttons.Model
+    { buttonsList : List Int
     }
-
-
-type alias ButtonsList =
-    List Buttons.Model
-
-
-type alias Position =
-    Int
 
 
 model =
     Model
-        [ Buttons.Model 0
-        , Buttons.Model 10
-        , Buttons.Model 20
-        , Buttons.Model 30
-        , Buttons.Model 30
-        , Buttons.Model 30
-        , Buttons.Model 30
-        , Buttons.Model 30
-        , Buttons.Model 30
-        , Buttons.Model 30000
+        [ 0
+        , 10
+        , 20
+        , 30
+        , 4000
         ]
 
 
 view model =
     div []
-        (List.indexedMap (\a buttons -> Html.map (Tag a) (Buttons.view buttons)) model.buttonsList)
+        (List.indexedMap
+            (\a buttons ->
+                Html.map
+                    (Tag a)
+                    (div
+                        [ style
+                            [ ( "border", "1px solid #aaa" )
+                            , ( "background-color", "#eee" )
+                            , ( "display", "inline-block" )
+                            , ( "padding", "10px" )
+                            , ( "margin", "10px" )
+                            , ( "text-align", "center" )
+                            ]
+                        ]
+                        [ Buttons.view buttons ]
+                    )
+            )
+            model.buttonsList
+        )
 
 
 type Msg
@@ -51,22 +57,12 @@ update msg model =
     case msg of
         Tag position button_Msg ->
             let
-                _ =
-                    Debug.log "Main.update.msg" msg
-
-                _ =
-                    Debug.log "Main.update.model" model
-
-                _ =
-                    Debug.log "Need to extract the Position from this message:" button_Msg
-
                 newButtons =
                     (Buttons.update button_Msg (getButtonsAtPosition model.buttonsList position))
             in
                 { model | buttonsList = setButtonsAtPosition model.buttonsList position newButtons }
 
 
-getButtonsAtPosition : ButtonsList -> Position -> Buttons.Model
 getButtonsAtPosition buttonsList position =
     let
         buttons =
@@ -74,13 +70,12 @@ getButtonsAtPosition buttonsList position =
     in
         case buttons of
             Nothing ->
-                Buttons.Model 0
+                0
 
             Just val ->
                 val
 
 
-setButtonsAtPosition : ButtonsList -> Position -> Buttons.Model -> ButtonsList
 setButtonsAtPosition buttonsList position buttons =
     let
         buttonsArray =
