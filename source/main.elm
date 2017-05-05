@@ -12,26 +12,24 @@ main =
 
 
 type alias Model =
-    { buttonsList : List Int
-    }
+    List Int
 
 
 model =
-    Model
-        [ 0
-        , 10
-        , 20
-        , 30
-        , 4000
-        ]
+    [ 0
+    , 10
+    , 20
+    , 30
+    , 4000
+    ]
 
 
 view model =
     div []
         (List.indexedMap
-            (\a buttons ->
+            (\index element ->
                 Html.map
-                    (Tag a)
+                    (Tag index)
                     (div
                         [ style
                             [ ( "border", "1px solid #aaa" )
@@ -42,10 +40,10 @@ view model =
                             , ( "text-align", "center" )
                             ]
                         ]
-                        [ Buttons.view buttons ]
+                        [ Buttons.view element ]
                     )
             )
-            model.buttonsList
+            model
         )
 
 
@@ -55,18 +53,18 @@ type Msg
 
 update msg model =
     case msg of
-        Tag position button_Msg ->
+        Tag index buttons_Msg ->
             let
                 newButtons =
-                    (Buttons.update button_Msg (getButtonsAtPosition model.buttonsList position))
+                    (Buttons.update buttons_Msg (getButtons model index))
             in
-                { model | buttonsList = setButtonsAtPosition model.buttonsList position newButtons }
+                setButtons model index newButtons
 
 
-getButtonsAtPosition buttonsList position =
+getButtons model index =
     let
         buttons =
-            Array.get position (Array.fromList buttonsList)
+            Array.get index (Array.fromList model)
     in
         case buttons of
             Nothing ->
@@ -76,12 +74,12 @@ getButtonsAtPosition buttonsList position =
                 val
 
 
-setButtonsAtPosition buttonsList position buttons =
+setButtons model index buttons =
     let
         buttonsArray =
-            Array.fromList buttonsList
+            Array.fromList model
 
         newButtonsArray =
-            Array.set position buttons buttonsArray
+            Array.set index buttons buttonsArray
     in
         Array.toList newButtonsArray
