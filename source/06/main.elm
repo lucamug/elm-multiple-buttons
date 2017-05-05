@@ -30,16 +30,16 @@ model =
 
 view model =
     div []
-        (List.indexedMap (\position buttons -> Html.map Tag (Buttons.view position buttons)) model.buttonsList)
+        (List.indexedMap (\position buttons -> Html.map (Tag position) (Buttons.view position buttons)) model.buttonsList)
 
 
 type Msg
-    = Tag Buttons.Msg
+    = Tag Int Buttons.Msg
 
 
 update msg model =
     case msg of
-        Tag button_Msg ->
+        Tag position button_Msg ->
             let
                 _ =
                     Debug.log "Main.update.msg" msg
@@ -49,9 +49,6 @@ update msg model =
 
                 _ =
                     Debug.log "Need to extract the Position from this message:" button_Msg
-
-                position =
-                    1
 
                 newButtons =
                     (Buttons.update button_Msg (getButtonsAtPosition model.buttonsList position))
