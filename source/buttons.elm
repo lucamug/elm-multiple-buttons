@@ -1,4 +1,4 @@
-module Buttons exposing (..)
+module Buttons exposing (view, Msg, update)
 
 import Html exposing (beginnerProgram, div, button, text)
 import Html.Events exposing (onClick)

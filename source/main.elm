@@ -8,20 +8,11 @@ import Array
 
 
 main =
-    beginnerProgram { model = model, view = view, update = update }
-
-
-type alias Model =
-    List Int
-
-
-model =
-    [ 0
-    , 10
-    , 20
-    , 30
-    , 4000
-    ]
+    beginnerProgram
+        { model = [ 0, 10, 20, 30, 4000, -1 ]
+        , view = view
+        , update = update
+        }
 
 
 view model =
@@ -51,16 +42,6 @@ type Msg
     = Tag Int Buttons.Msg
 
 
-update msg model =
-    case msg of
-        Tag index buttons_Msg ->
-            let
-                newButtons =
-                    (Buttons.update buttons_Msg (getButtons model index))
-            in
-                setButtons model index newButtons
-
-
 getButtons model index =
     let
         buttons =
@@ -83,3 +64,16 @@ setButtons model index buttons =
             Array.set index buttons buttonsArray
     in
         Array.toList newButtonsArray
+
+
+update msg model =
+    case msg of
+        Tag index buttons_Msg ->
+            let
+                oldButtons =
+                    getButtons model index
+
+                newButtons =
+                    Buttons.update buttons_Msg oldButtons
+            in
+                setButtons model index newButtons
