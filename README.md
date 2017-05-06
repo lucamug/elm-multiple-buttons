@@ -12,7 +12,6 @@ To see the code:
 
     $ git clone https://github.com/lucamug/elm-multiple-buttons.git
     $ cd elm-multiple-buttons/
-    $ elm-package install
     $ elm-reactor
 
 and open
